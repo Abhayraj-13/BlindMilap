@@ -1,41 +1,16 @@
-// const port=4000;
-// const express=require('express');
-// const app=express();
-// const mongoose=require('mongoose');
-// const jwt=require('jsonwebtoken');
-// const cors=require('cors');
-// const bodyParser=require('body-parser');
 
-
-// app.use(express.json());
-// app.use(cors());
-
-
-
-
-
-
-
-
-
-// app.listen(port,()=>{
-//     console.log(`Server is running on port ${port}`);
-// });
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import CORS
-const User = require('./schema'); // Import the schema
+const cors = require('cors');
+const User = require('./schema');
+const { generateUniqueUsername } = require('./username_generator');
 
 const app = express();
-const port = process.env.PORT || 4000; // Changed to port 4000
+const port = process.env.PORT || 4000;
 
-// Enable CORS
 app.use(cors());
-
-// Middleware to parse JSON
 app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect('mongodb+srv://supermanhappyvy:Byasyadav1*@cluster0.9nm1yqx.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -45,18 +20,19 @@ mongoose.connect('mongodb+srv://supermanhappyvy:Byasyadav1*@cluster0.9nm1yqx.mon
   console.error('Error connecting to MongoDB', error);
 });
 
-// Routes
 app.post('/users', async (req, res) => {
   try {
-    const user = new User(req.body);
+    const username = generateUniqueUsername();
+    const userData = { ...req.body, username };
+    const user = new User(userData);
     await user.save();
-    res.status(201).send(user);
+    res.status(201).send(user);  // Ensure this sends the user including the username
   } catch (error) {
     res.status(400).send(error);
   }
 });
 
-app.get('/users', async (req, res) => {
+app.get('/allusers', async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
@@ -65,7 +41,8 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Start the server
 app.listen(port, () => {
+  const username = generateUniqueUsername();
+  console.log('Generated username:', username);
   console.log(`Server is running on port ${port}`);
 });

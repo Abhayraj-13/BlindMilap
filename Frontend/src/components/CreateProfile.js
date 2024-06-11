@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 const CreateProfile = () => {
@@ -18,7 +19,7 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting:', formData); // Log form data for debugging
+    console.log('Submitting:', formData);
     try {
       const response = await fetch('http://localhost:4000/users', {
         method: 'POST',
@@ -28,7 +29,9 @@ const CreateProfile = () => {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        alert('User added successfully!');
+        const user = await response.json();
+        console.log('User:', user);  // Debugging line
+        alert(`User added successfully! Your username is: ${user.username}`);
         setFormData({
           name: '',
           gender: '',

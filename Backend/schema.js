@@ -35,7 +35,13 @@ const userSchema = new Schema({
   bio: {
     type: String,
     trim: true
+  },
+  username: { // Add the username field
+    type: String,
+    required: true,
+    unique: true
   }
+
 });
 
 const User = mongoose.model('User', userSchema);
