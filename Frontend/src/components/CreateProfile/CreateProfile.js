@@ -19,23 +19,19 @@ const CreateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting:', formData);
     try {
-      // Submit the form data to the FastAPI server and receive the generated username
-      const response = await fetch('http://localhost:8000/submit-form', {
+      const response = await fetch('http://localhost:4000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       });
-      const data = await response.json();
-
-      // Alert the user with the generated username
-      const generatedUsername = data.username;
-      alert(`Your generated username is: ${generatedUsername}`);
-
       if (response.ok) {
-        alert('User added successfully!');
+        const user = await response.json();
+        console.log('User:', user);  // Debugging line
+        alert(`User added successfully! Your username is: ${user.username}`);
         setFormData({
           name: '',
           gender: '',
@@ -55,6 +51,7 @@ const CreateProfile = () => {
       alert('Error adding user');
     }
   };
+
 
   return (
     <div className="form-container">
