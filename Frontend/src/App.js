@@ -4,7 +4,7 @@ import ChatBox from "./components/ChatBox";
 import Welcome from "./components/Welcome";
 import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import CreateProfile from "./components/CreateProfile";
+import CreateProfile from "./components/CreateProfile/CreateProfile";
 
 
 function App() {
