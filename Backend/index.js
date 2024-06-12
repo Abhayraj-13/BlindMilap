@@ -20,6 +20,8 @@ mongoose.connect('mongodb+srv://supermanhappyvy:Byasyadav1*@cluster0.9nm1yqx.mon
   console.error('Error connecting to MongoDB', error);
 });
 
+
+
 app.post('/users', async (req, res) => {
   try {
     const username = generateUniqueUsername();

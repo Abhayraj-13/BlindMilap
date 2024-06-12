@@ -5,6 +5,8 @@ import Welcome from "./components/Welcome";
 import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import CreateProfile from "./components/CreateProfile/CreateProfile";
+import LoginPage from "./components/Login/login";
+
 
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
     <div className="App">
       <NavBar />
       {!user ? (
-        <CreateProfile/>
+                 <LoginPage/>   //<CreateProfile/>
       ) : (
         <>
           <ChatBox />
