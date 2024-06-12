@@ -26,7 +26,7 @@ app.post('/users', async (req, res) => {
     const userData = { ...req.body, username };
     const user = new User(userData);
     await user.save();
-    res.status(201).send(user);  // Ensure this sends the user including the username
+    res.status(201).send(user);
   } catch (error) {
     res.status(400).send(error);
   }
