@@ -67,6 +67,7 @@ const CreateProfile = () => {
     <div className="form-container">
       {!showAvatar ? (
         <form onSubmit={handleNext}>
+        <h1>Create Your Profile</h1>
           <label>
             Name:
             <input type="text" name="name" value={formData.name} onChange={handleChange} required />
