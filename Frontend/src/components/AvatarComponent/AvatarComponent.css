@@ -1,0 +1,34 @@
+html{
+    color:white;
+}
+
+.App {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  h1 {
+    color: white;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    color: white;
+  }
+
+  .typo{
+    color: white;
+  }
+  
+  img {
+    width: 250px;
+    height: 250px;
+  }
+  
