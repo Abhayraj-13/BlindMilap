@@ -1,87 +1,36 @@
+
 import React, { useState } from 'react';
-import seedrandom from 'seedrandom';
-import { Container, Typography, FormControl, InputLabel, Select, MenuItem, Box, Button, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import './AvatarComponent.css';
 
-const AvatarGenerator = () => {
-  const topTypeOptions = [
-    "NoHair", "Eyepatch", "Hat", "Hijab", "Turban", "WinterHat1", "WinterHat2",
-    "WinterHat3", "WinterHat4", "LongHairBigHair", "LongHairBob", "LongHairBun",
-    "LongHairCurly", "LongHairCurvy", "LongHairDreads", "LongHairFrida",
-    "LongHairFro", "LongHairFroBand", "LongHairNotTooLong", "LongHairShavedSides",
-    "LongHairMiaWallace", "LongHairStraight", "LongHairStraight2", "LongHairStraightStrand",
-    "ShortHairDreads01", "ShortHairDreads02", "ShortHairFrizzle", "ShortHairShaggyMullet",
-    "ShortHairShortCurly", "ShortHairShortFlat", "ShortHairShortRound", "ShortHairShortWaved",
-    "ShortHairSides", "ShortHairTheCaesar", "ShortHairTheCaesarSidePart"
-  ];
-
-  const accessoriesTypeOptions = [
-    "Blank", "Kurt", "Prescription01", "Prescription02", "Round", "Sunglasses", "Wayfarers"
-  ];
-
-  const facialHairTypeOptions = [
-    "Blank", "BeardMedium", "BeardLight", "BeardMagestic", "MoustacheFancy", "MoustacheMagnum"
-  ];
-
-  const facialHairColorOptions = [
-    "Auburn", "Black", "Blonde", "BlondeGolden", "Brown", "BrownDark", "Platinum", "Red"
-  ];
-
-  const clotheTypeOptions = [
-    "BlazerShirt", "BlazerSweater", "CollarSweater", "GraphicShirt", "Hoodie", "Overall",
-    "ShirtCrewNeck", "ShirtScoopNeck", "ShirtVNeck"
-  ];
-
-  const eyeTypeOptions = [
-    "Close", "Cry", "Default", "Dizzy", "EyeRoll", "Happy", "Hearts", "Side",
-    "Squint", "Surprised", "Wink", "WinkWacky"
-  ];
-
-  const eyebrowTypeOptions = [
-    "Angry", "AngryNatural", "Default", "DefaultNatural", "FlatNatural", "RaisedExcited",
-    "RaisedExcitedNatural", "SadConcerned", "SadConcernedNatural", "UnibrowNatural", "UpDown",
-    "UpDownNatural"
-  ];
-
-  const mouthTypeOptions = [
-    "Concerned", "Default", "Disbelief", "Eating", "Grimace", "Sad", "ScreamOpen",
-    "Serious", "Smile", "Tongue", "Twinkle", "Vomit"
-  ];
-
-  const skinColorOptions = [
-    "Tanned", "Yellow", "Pale", "Light", "Brown", "DarkBrown", "Black"
-  ];
-
-  const hairColorOptions = [
-    "Auburn", "Black", "Blonde", "BlondeGolden", "Brown", "BrownDark",
-    "PastelPink", "Platinum", "Red", "SilverGray"
-  ];
-
-  const hatColorOptions = [
-    "Black", "Blue01", "Blue02", "Blue03", "Gray01", "Gray02", "Heather",
-    "PastelBlue", "PastelGreen", "PastelOrange", "PastelRed", "PastelYellow",
-    "Pink", "Red", "White"
-  ];
-
-  const clotheColorOptions = [
-    "Black", "Blue01", "Blue02", "Blue03", "Gray01", "Gray02", "Heather",
-    "PastelBlue", "PastelGreen", "PastelOrange", "PastelRed", "PastelYellow",
-    "Pink", "Red", "White"
-  ];
+const AvatarGenerator = ({ onSubmit }) => {
+  const options = {
+    topType: ["NoHair", "Eyepatch", "Hat", "Hijab", "Turban", "WinterHat1", "WinterHat2", "WinterHat3", "WinterHat4", "LongHairBigHair", "LongHairBob", "LongHairBun", "LongHairCurly", "LongHairCurvy", "LongHairDreads", "LongHairFrida", "LongHairFro", "LongHairFroBand", "LongHairNotTooLong", "LongHairShavedSides", "LongHairMiaWallace", "LongHairStraight", "LongHairStraight2", "LongHairStraightStrand", "ShortHairDreads01", "ShortHairDreads02", "ShortHairFrizzle", "ShortHairShaggyMullet", "ShortHairShortCurly", "ShortHairShortFlat", "ShortHairShortRound", "ShortHairShortWaved", "ShortHairSides", "ShortHairTheCaesar", "ShortHairTheCaesarSidePart"],
+    accessoriesType: ["Blank", "Kurt", "Prescription01", "Prescription02", "Round", "Sunglasses", "Wayfarers"],
+    facialHairType: ["Blank", "BeardMedium", "BeardLight", "BeardMagestic", "MoustacheFancy", "MoustacheMagnum"],
+    facialHairColor: ["Auburn", "Black", "Blonde", "BlondeGolden", "Brown", "BrownDark", "Platinum", "Red"],
+    clotheType: ["BlazerShirt", "BlazerSweater", "CollarSweater", "GraphicShirt", "Hoodie", "Overall", "ShirtCrewNeck", "ShirtScoopNeck", "ShirtVNeck"],
+    eyeType: ["Close", "Cry", "Default", "Dizzy", "EyeRoll", "Happy", "Hearts", "Side", "Squint", "Surprised", "Wink", "WinkWacky"],
+    eyebrowType: ["Angry", "AngryNatural", "Default", "DefaultNatural", "FlatNatural", "RaisedExcited", "RaisedExcitedNatural", "SadConcerned", "SadConcernedNatural", "UnibrowNatural", "UpDown", "UpDownNatural"],
+    mouthType: ["Concerned", "Default", "Disbelief", "Eating", "Grimace", "Sad", "ScreamOpen", "Serious", "Smile", "Tongue", "Twinkle", "Vomit"],
+    skinColor: ["Tanned", "Yellow", "Pale", "Light", "Brown", "DarkBrown", "Black"],
+    hairColor: ["Auburn", "Black", "Blonde", "BlondeGolden", "Brown", "BrownDark", "PastelPink", "Platinum", "Red", "SilverGray"],
+    hatColor: ["Black", "Blue01", "Blue02", "Blue03", "Gray01", "Gray02", "Heather", "PastelBlue", "PastelGreen", "PastelOrange", "PastelRed", "PastelYellow", "Pink", "Red", "White"],
+    clotheColor: ["Black", "Blue01", "Blue02", "Blue03", "Gray01", "Gray02", "Heather", "PastelBlue", "PastelGreen", "PastelOrange", "PastelRed", "PastelYellow", "Pink", "Red", "White"]
+  };
 
   const [avatarOptions, setAvatarOptions] = useState({
-    topType: topTypeOptions[0],
-    accessoriesType: accessoriesTypeOptions[0],
-    facialHairType: facialHairTypeOptions[0],
-    facialHairColor: facialHairColorOptions[0],
-    clotheType: clotheTypeOptions[0],
-    eyeType: eyeTypeOptions[0],
-    eyebrowType: eyebrowTypeOptions[0],
-    mouthType: mouthTypeOptions[0],
-    skinColor: skinColorOptions[0],
-    hairColor: hairColorOptions[0],
-    hatColor: hatColorOptions[0],
-    clotheColor: clotheColorOptions[0]
+    topType: options.topType[0],
+    accessoriesType: options.accessoriesType[0],
+    facialHairType: options.facialHairType[0],
+    facialHairColor: options.facialHairColor[0],
+    clotheType: options.clotheType[0],
+    eyeType: options.eyeType[0],
+    eyebrowType: options.eyebrowType[0],
+    mouthType: options.mouthType[0],
+    skinColor: options.skinColor[0],
+    hairColor: options.hairColor[0],
+    hatColor: options.hatColor[0],
+    clotheColor: options.clotheColor[0]
   });
 
   const handleOptionChange = (e) => {
@@ -97,104 +46,134 @@ const AvatarGenerator = () => {
       eyeType, eyebrowType, mouthType, skinColor, hairColor, hatColor, clotheColor
     } = avatarOptions;
 
-    return `https://avataaars.io/?accessoriesType=${accessoriesType}&avatarStyle=Circle&clotheColor=${clotheColor}&clotheType=${clotheType}&eyeType=${eyeType}&eyebrowType=${eyebrowType}&facialHairColor=${facialHairColor}&facialHairType=${facialHairType}&hairColor=${hairColor}&hatColor=${hatColor}&mouthType=${mouthType}&skinColor=${skinColor}&topType=${topType}`;
-
-
+    return `https://avataaars.io/?avatarStyle=Circle&topType=${topType}&accessoriesType=${accessoriesType}&hairColor=${hairColor}&facialHairType=${facialHairType}&facialHairColor=${facialHairColor}&clotheType=${clotheType}&clotheColor=${clotheColor}&eyeType=${eyeType}&eyebrowType=${eyebrowType}&mouthType=${mouthType}&skinColor=${skinColor}&hatColor=${hatColor}`;
   };
 
-  //console log the url
-  
-  const generatedProfilepicAvatar =  generateAvatarUrl();
-  console.log(generatedProfilepicAvatar);
-
-
-
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#1976d2',
-      },
-      secondary: {
-        main: '#dc004e',
-      },
-    },
-    components: {
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
-            color: 'white',
-          },
-        },
-      },
-      MuiSelect: {
-        styleOverrides: {
-          icon: {
-            color: 'white',
-          },
-        },
-      },
-      MuiMenuItem: {
-        styleOverrides: {
-          root: {
-            '&:hover': {
-              backgroundColor: '#1976d2',
-              color: 'white',
-            },
-          },
-        },
-      },
-    },
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const avatarUrl = generateAvatarUrl();
+    onSubmit(avatarUrl);
+  };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <div className="App">
-          <Typography component="h1" variant="h4" align="center" gutterBottom>
-            Avatar Generator
-          </Typography>
-          <Box component="form" sx={{ mt: 4 }}>
-            {Object.keys(avatarOptions).map((key) => (
-              <FormControl fullWidth sx={{ mb: 2 }} key={key}>
-                <InputLabel>{key.replace(/([A-Z])/g, ' $1').trim()}</InputLabel>
-                <Select
-                  name={key}
-                  value={avatarOptions[key]}
-                  onChange={handleOptionChange}
-                  sx={{
-                    color: 'white',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'white',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'white',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: 'white',
-                    },
-                  }}
-                >
-                  {eval(key + 'Options').map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+    <div className="avatar-generator">
+      <h1>Generate Your Avatar</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Top Type:
+          <select name="topType" value={avatarOptions.topType} onChange={handleOptionChange}>
+            {options.topType.map(option => (
+              <option key={option} value={option}>{option}</option>
             ))}
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-            <img src={generateAvatarUrl()} alt="Generated Avatar" style={{ borderRadius: '50%', border: '2px solid #000' }} />
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Button variant="contained" color="primary" onClick={() => setAvatarOptions({ ...avatarOptions })}>
-              Regenerate Avatar
-            </Button>
-          </Box>
+          </select>
+        </label>
+        <label>
+          Accessories Type:
+          <select name="accessoriesType" value={avatarOptions.accessoriesType} onChange={handleOptionChange}>
+            {options.accessoriesType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+//
+        <label>
+          Facial Hair Type:
+          <select name="facialHairType" value={avatarOptions.facialHairType} onChange={handleOptionChange}>
+            {options.facialHairType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Facial HairColor Type:
+          <select name="facialHairColor" value={avatarOptions.facialHairColor} onChange={handleOptionChange}>
+            {options.facialHairColor.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Cloth Type:
+          <select name="clotheType" value={avatarOptions.clotheType} onChange={handleOptionChange}>
+            {options.clotheType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Eye Type:
+          <select name="eyeType" value={avatarOptions.eyeType} onChange={handleOptionChange}>
+            {options.eyeType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Eyebrow Type:
+          <select name="eyebrowType" value={avatarOptions.eyebrowType} onChange={handleOptionChange}>
+            {options.eyebrowType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Mouth Type:
+          <select name="mouthType" value={avatarOptions.mouthType} onChange={handleOptionChange}>
+            {options.mouthType.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Skin Color Type:
+          <select name="skinColor" value={avatarOptions.skinColor} onChange={handleOptionChange}>
+            {options.skinColor.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Hair Color Type:
+          <select name="hairColor" value={avatarOptions.hairColor} onChange={handleOptionChange}>
+            {options.hairColor.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Hat Color Type:
+          <select name="hatColor" value={avatarOptions.hatColor} onChange={handleOptionChange}>
+            {options.hatColor.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          Dress Color Type:
+          <select name="clotheColor" value={avatarOptions.clotheColor} onChange={handleOptionChange}>
+            {options.clotheColor.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </label>
+
+        <div className="avatar-preview">
+          <img src={generateAvatarUrl()} alt="Generated Avatar" />
         </div>
-      </Container>
-    </ThemeProvider>
+        <button type="submit">Submit</button>
+      </form>
+      
+    </div>
+    
   );
 };
 

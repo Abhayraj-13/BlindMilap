@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <NavBar />
       {!user ? (
-           <AvatarComponent/>   //  <LoginPage/>   //<CreateProfile/>
+        <CreateProfile/> //<AvatarComponent/>   //  <LoginPage/>  
       ) : (
         <>
           <ChatBox />

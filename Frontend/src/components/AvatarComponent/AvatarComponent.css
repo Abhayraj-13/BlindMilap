@@ -10,16 +10,18 @@ html{
     justify-content: center;
     padding: 20px;
   }
-
+label{
+    color:black;  
+}
   h1 {
-    color: white;
+    color: black;
   }
   
   form {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: center;
     color: white;
   }
 
