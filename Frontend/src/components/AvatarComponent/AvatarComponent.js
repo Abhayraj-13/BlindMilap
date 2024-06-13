@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import seedrandom from 'seedrandom';
-import { Container, Typography, FormControl, InputLabel, Select, MenuItem, Box, Button, CssBaseline } from '@mui/material';
-import './AvatarComponent.css'
+import { Container, Typography, FormControl, InputLabel, Select, MenuItem, Box, Button, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import './AvatarComponent.css';
 
 const AvatarGenerator = () => {
   const topTypeOptions = [
@@ -98,43 +98,103 @@ const AvatarGenerator = () => {
     } = avatarOptions;
 
     return `https://avataaars.io/?accessoriesType=${accessoriesType}&avatarStyle=Circle&clotheColor=${clotheColor}&clotheType=${clotheType}&eyeType=${eyeType}&eyebrowType=${eyebrowType}&facialHairColor=${facialHairColor}&facialHairType=${facialHairType}&hairColor=${hairColor}&hatColor=${hatColor}&mouthType=${mouthType}&skinColor=${skinColor}&topType=${topType}`;
+
+
   };
 
+  //console log the url
+  
+  const generatedProfilepicAvatar =  generateAvatarUrl();
+  console.log(generatedProfilepicAvatar);
+
+
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1976d2',
+      },
+      secondary: {
+        main: '#dc004e',
+      },
+    },
+    components: {
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: 'white',
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          icon: {
+            color: 'white',
+          },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            '&:hover': {
+              backgroundColor: '#1976d2',
+              color: 'white',
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <div className="App">
-        <Typography component="h1" className="typo" variant="h4" align="center" gutterBottom>
-          Avatar Generator
-        </Typography>
-        <Box component="form" sx={{ mt: 4 }}>
-          {Object.keys(avatarOptions).map((key) => (
-            <FormControl fullWidth sx={{ mb: 2 }} key={key}>
-              <InputLabel>{key.replace(/([A-Z])/g, ' $1').trim()}</InputLabel>
-              <Select
-                name={key}
-                value={avatarOptions[key]}
-                onChange={handleOptionChange}
-              >
-                {eval(key + 'Options').map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          ))}
-        </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, color: 'white' }}>
-          <img src={generateAvatarUrl()} alt="Generated Avatar" style={{ borderRadius: '50%', border: '2px solid #000' }} />
-        </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Button variant="contained" color="primary" onClick={() => setAvatarOptions({ ...avatarOptions })}>
-            Regenerate Avatar
-          </Button>
-        </Box>
-      </div>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
+        <div className="App">
+          <Typography component="h1" variant="h4" align="center" gutterBottom>
+            Avatar Generator
+          </Typography>
+          <Box component="form" sx={{ mt: 4 }}>
+            {Object.keys(avatarOptions).map((key) => (
+              <FormControl fullWidth sx={{ mb: 2 }} key={key}>
+                <InputLabel>{key.replace(/([A-Z])/g, ' $1').trim()}</InputLabel>
+                <Select
+                  name={key}
+                  value={avatarOptions[key]}
+                  onChange={handleOptionChange}
+                  sx={{
+                    color: 'white',
+                    '.MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'white',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'white',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: 'white',
+                    },
+                  }}
+                >
+                  {eval(key + 'Options').map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ))}
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <img src={generateAvatarUrl()} alt="Generated Avatar" style={{ borderRadius: '50%', border: '2px solid #000' }} />
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Button variant="contained" color="primary" onClick={() => setAvatarOptions({ ...avatarOptions })}>
+              Regenerate Avatar
+            </Button>
+          </Box>
+        </div>
+      </Container>
+    </ThemeProvider>
   );
 };
 

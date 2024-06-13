@@ -32,3 +32,8 @@ html{
     height: 250px;
   }
   
+
+  .css-15reu3p-MuiFormLabel-root-MuiInputLabel-root{
+    position: absolute;
+    top:-10px;
+  }
