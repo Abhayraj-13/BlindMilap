@@ -1,0 +1,52 @@
+will recommend any gender to anyone
+
+For Normal Users :
+
+1. Show generated Username
+2. Show chosen Avatar-- they will choose a/c to their gender , no problem in understanding gender
+
+3. show year
+4. show bio
+
+5. Randomly Match
+6. Chat
+
+------------------------------------------------------
+For premium users :
+1. Enable option for Profile photo
+2. Give two option - Profile photo / Avatar like Instagram
+3. Show year
+4. Show bio
+
+5. Two options :
+	i. Random Match
+	ii. Match based on Profile, show compatibility percentage
+
+6. Search button for searching profiles ?
+
+7. Give a " Show Compatibility Match " option and run ML model to check compatibility [ if 6]
+
+6.Chat
+
+--------------------------------------------------
+
+1.MAKE A REGISTER PAGE .
+
+	i.RANDOM USERNAME GENERATOR .
+	ii.RANDOM AVATAR GENERATOR .
+	iii.STORE IT IN MONGO .
+
+2. Login page
+
+	i.LOGIC TO CHECK USER IS REGISTERED OR NOT
+	ii.if yes? feed : signup page
+
+	iii. after login open feed, after 5sec prompt a popup for buying premium ( list features of premium )
+
+3. Feed Page
+	i. Website :
+		a. sidepanel :  Feed page ( default) , chats , notification ( inbox for requests) , profile , rate app
+		b.
+
+//  https://www.figma.com/design/IlhgYvGetAh7dmyS6GEEGh/Untitled?node-id=0-1&t=ELBLRzMm86inTRAD-0
+
