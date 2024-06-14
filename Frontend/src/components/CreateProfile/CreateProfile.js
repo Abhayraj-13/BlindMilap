@@ -1,7 +1,9 @@
 
+
 import React, { useState } from 'react';
 import './CreateProfile.css';
 import AvatarGenerator from '../AvatarComponent/AvatarComponent';
+import FeedProfileCards from '../FeedPage/FeedProfileCards/FeedProfileCards';
 
 const CreateProfile = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const CreateProfile = () => {
   });
 
   const [showAvatar, setShowAvatar] = useState(false);
+  const [showFeed, setShowFeed] = useState(true);
+  const [showProfileCard, setShowProfileCard] = useState(false); // Add state to control rendering of CreateProfileCard
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +56,8 @@ const CreateProfile = () => {
           bio: '',
         });
         setShowAvatar(false);
+        setShowFeed(false);
+        setShowProfileCard(true); // Show CreateProfileCard component
       } else {
         const errorData = await response.json();
         console.error('Failed to add user:', errorData);
@@ -65,9 +71,9 @@ const CreateProfile = () => {
 
   return (
     <div className="form-container">
-      {!showAvatar ? (
+      {!showAvatar && !showProfileCard ? (
         <form onSubmit={handleNext}>
-        <h1>Create Your Profile</h1>
+          <h1>Create Your Profile</h1>
           <label>
             Name:
             <input type="text" name="name" value={formData.name} onChange={handleChange} required />
@@ -103,8 +109,10 @@ const CreateProfile = () => {
           </label>
           <button type="submit">Next</button>
         </form>
-      ) : (
+      ) : showAvatar ? (
         <AvatarGenerator onSubmit={handleAvatarSubmit} />
+      ) : (
+        showProfileCard && <FeedProfileCards />
       )}
     </div>
   );
