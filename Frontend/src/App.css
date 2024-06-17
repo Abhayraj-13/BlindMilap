@@ -27,7 +27,12 @@ input {
 }
 
 /* navbar */
-.nav-bar {
+/* Navbar styles */
+
+
+
+
+/* .nav-bar {
   padding: 10px 30px;
   display: flex;
   align-items: center;
@@ -56,7 +61,7 @@ input {
   border: 1px solid #1c2c4c;
   background-color: #1c2c4c;
   font-weight: 600;
-}
+} */
 
 /* welcome page */
 .welcome {

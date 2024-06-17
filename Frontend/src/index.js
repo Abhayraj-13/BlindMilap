@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import './tailwind.css'; // Import Tailwind CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -9,3 +11,4 @@ root.render(
     <App />
   </React.StrictMode>
 );
+// reportWebVitals();
