@@ -75,7 +75,7 @@ const AvatarGenerator = ({ onSubmit }) => {
             ))}
           </select>
         </label>
-//
+
         <label>
           Facial Hair Type:
           <select name="facialHairType" value={avatarOptions.facialHairType} onChange={handleOptionChange}>

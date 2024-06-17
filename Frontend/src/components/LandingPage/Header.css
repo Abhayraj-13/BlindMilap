@@ -1,0 +1,40 @@
+/* CSS for the Header.jsx component */
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+body
+{
+  background: url("../../../public/outerspace.png") no-repeat center center fixed;
+  background-size: cover;
+
+}
+
+
+.header {
+    width: 90vw;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px; 
+  }
+
+
+  .logo img {
+    height: 50px; 
+  }
+
+
+
+  .nav-links {
+    display: flex;
+    gap: 70px; 
+  }
+  
+  .nav-links a {
+    font-family: 'Exo 2', sans-serif;
+        text-decoration: none; 
+    color: #e3b12a; 
+    font-size: 20px;
+}
+

@@ -9,6 +9,7 @@ import LoginPage from "./components/Login/login";
 import AvatarComponent from "./components/AvatarComponent/AvatarComponent";
 import FeedNavbar from "./components/FeedPage/FeedNavbar/FeedNavbar";
 
+import LandingPage from "./components/LandingPage/Landingpage";
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 
 
@@ -18,15 +19,16 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <LandingPage/>
+      {/* <NavBar />
 
       {!user ? (
         <Welcome />  
       ) : (
         <>
-        <CreateProfile/> 
+        <CreateProfile/>
         </>
-      )}
+      )} */}
 
 
       <BrowserRouter>

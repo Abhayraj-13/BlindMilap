@@ -1,4 +1,4 @@
-*,
+/* *,
 *:before,
 *:after {
   box-sizing: border-box;
@@ -26,7 +26,7 @@ input {
   padding-top: 60px;
 }
 
-/* navbar */
+
 .nav-bar {
   padding: 10px 30px;
   display: flex;
@@ -58,7 +58,7 @@ input {
   font-weight: 600;
 }
 
-/* welcome page */
+
 .welcome {
   padding: 30px;
   text-align: center;
@@ -69,7 +69,6 @@ input {
   margin-bottom: 20px;
 }
 
-/* chat component */
 .messages-wrapper {
   padding: 30px;
   margin-bottom: 60px;
@@ -112,7 +111,6 @@ input {
   text-align: right;
 }
 
-/* send message */
 .send-message {
   position: fixed;
   bottom: 0px;
@@ -147,4 +145,6 @@ input {
   border: 1px solid #7cc5d9;
   background-color: #7cc5d9;
   font-weight: 600;
-}
+} */
+
+
