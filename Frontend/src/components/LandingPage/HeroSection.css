@@ -1,11 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 .hero-content
 {
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Quantico', sans-serif;
     font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 45vh;
 }
 
-p
-{
-    width: 70%;
+.paraText
+{    position: relative;
+    top: 189px;
+    right: 21px;
+    font-size: 33px;
+    width: 64%;
     text-align: center;
+    margin-bottom: 5%;
 }
+
+
+.mainText{
+font-size: 48px;
+font-weight: 700;
+color: #8dcae9;
+margin-bottom: 2%;
+position: relative;
+top: 214px;
+}
+
+.telescope {
+    position: relative;
+    top: 33px;
+    width: 43%;
+    z-index: 20;
+    margin-top: -70px;
+    margin-right: 150px;
+}
+
+.spanText{
+    color:#e0a929;
+}
+
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+  }
