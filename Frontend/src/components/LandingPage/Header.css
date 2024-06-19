@@ -3,20 +3,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-body
+/* body
 {
-  background: url("../../../public/newbackground.png") no-repeat center center fixed;
+  background: url("../../../public/HeroSection.png") no-repeat center center fixed;
   background-size: cover;
+  z-index: 20;
 
-}
+} */
 
 
 .header {
     width: 90vw;
+    position: relative;
     display: flex;
     justify-content: space-between; 
     align-items: center; 
     padding: 10px 20px; 
+    z-index: 100;
   }
 
 
