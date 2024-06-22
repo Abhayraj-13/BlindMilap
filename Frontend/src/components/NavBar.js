@@ -5,12 +5,14 @@ import GoogleSignin from "../img/btn_google_signin_dark_pressed_web.png";
 import SignUpForm from "./sign_up/sign-up";
 import VerifyEmail from "./VerifyEmail";
 import { signInWithPopup } from "firebase/auth";
+import Login from "./Login/login";
 
 const NavBar = () => {
   const [user] = useAuthState(auth);
   const [showSignUpOptions, setShowSignUpOptions] = useState(false);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [verificationEmailSent, setVerificationEmailSent] = useState(false);
+
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -35,6 +37,7 @@ const NavBar = () => {
     signOut(auth);
   };
 
+
   return (
     <div>
       <div className="navbar">
@@ -48,7 +51,7 @@ const NavBar = () => {
               <button className="btn" onClick={handleSignUpClick}>
                 Sign Up
               </button>
-              <button className="btn">Login</button>
+             <button className="btn">Login</button>
             </>
           )}
         </div>
