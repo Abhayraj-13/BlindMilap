@@ -24,12 +24,8 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-    "react-firebase-hooks": "^5.1.1",
-=======
     "react-firebase-hooks": "^5.0.3",
     "react-parallax": "^3.5.1",
->>>>>>> dc97d98322e0510bdaa03ff181fe59727b1ac92b
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.3",

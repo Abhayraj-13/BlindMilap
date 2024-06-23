@@ -1,6 +1,7 @@
 // src/components/LandingPage/Header.js
 import React from 'react';
 import './Header.css'; // Make sure to import your CSS file
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -13,9 +14,9 @@ const Header = () => {
       <div className="nav-links">
         <a href="#hero">Home</a>
         <a href="#about">Pricing</a>
-        <a href="#pricing">Register</a>
+      <Link to='/signup'><a>Register</a></Link>  
         {/* <a href="#testimonials">Testimonials</a> */}
-        <a href="#footer">Login</a>
+        <Link to='/login'><a href="">Login</a></Link>
       </div>
     </div>
   );

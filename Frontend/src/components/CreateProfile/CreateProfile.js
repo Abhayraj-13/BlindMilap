@@ -3,6 +3,10 @@ import './CreateProfile.css';
 import AvatarGenerator from '../AvatarComponent/AvatarComponent';
 import FeedProfileCards from '../FeedPage/FeedProfileCards/FeedProfileCards';
 import NavBar from '../NavBar';
+import { navigate } from 'react-router-dom';
+import { auth, GoogleAuthProvider, signOut } from "../../firebase";
+
+import Login from '../Login/login';
 
 const CreateProfile = () => {
 const [formData, setFormData] = useState({
@@ -16,6 +20,7 @@ bio: '',
 });
 
 const [showAvatar, setShowAvatar] = useState(false);
+
 const [showFeed, setShowFeed] = useState(true);
 const [showProfileCard, setShowProfileCard] = useState(false); // Add state to control rendering of CreateProfileCard
 
@@ -23,6 +28,14 @@ const handleChange = (e) => {
 const { name, value } = e.target;
 setFormData({ ...formData, [name]: value });
 };
+
+
+//changes
+const handleSignOut = () => {
+  signOut(auth);
+};
+
+
 
 const handleNext = (e) => {
 e.preventDefault();
@@ -56,6 +69,7 @@ try {
     });
     setShowAvatar(false);
     setShowFeed(false);
+    handleSignOut();
     setShowProfileCard(true); // Show CreateProfileCard component
   } else {
     const errorData = await response.json();
@@ -112,7 +126,7 @@ Bio:
 ) : showAvatar ? (
 <AvatarGenerator onSubmit={handleAvatarSubmit} />
 ) : (
-showProfileCard && <FeedProfileCards />
+showProfileCard && <Login />
 )}
 </div>
 );
