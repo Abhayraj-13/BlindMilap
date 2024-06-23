@@ -8,13 +8,14 @@ const Header = () => {
       <div className="logo">
         {/* Placeholder logo */}
         <img src="https://via.placeholder.com/150" alt="Logo" />
+        {/* <span className='logoText'>Spacebook</span> */}
       </div>
       <div className="nav-links">
         <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#pricing">Pricing</a>
+        <a href="#about">Pricing</a>
+        <a href="#pricing">Register</a>
         {/* <a href="#testimonials">Testimonials</a> */}
-        <a href="#footer">Contact</a>
+        <a href="#footer">Login</a>
       </div>
     </div>
   );

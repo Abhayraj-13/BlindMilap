@@ -1,0 +1,57 @@
+.captain-nova-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .captain-nova-container.visible {
+    opacity: 1;
+  }
+  
+  .captain-nova-image {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .speech-bubble {
+    position: relative;
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 200px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transform: translateX(-10px);
+  }
+  
+  .speech-bubble.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #3f51b5 transparent transparent;
+  }
+  
+  .speech-bubble h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+  }
+  
+  .speech-bubble p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
