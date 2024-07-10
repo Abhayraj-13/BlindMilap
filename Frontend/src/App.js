@@ -1,7 +1,4 @@
 
-
-
-
 import "./App.css";
 import NavBar from "./components/NavBar";
 import ChatBox from "./components/ChatBox";
@@ -18,6 +15,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import FeedProfileCards from "./components/FeedPage/FeedProfileCards/FeedProfileCards";
 import LandingPage from "./components/LandingPage/Landingpage";
+import FriendRequests from "./components/FriendRequest/FriendRequests";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -31,6 +29,8 @@ function App() {
           <Route path="/home" element={<LandingPage />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+
+
           <Route path="/createprofile" element={<ProtectedRoute requireVerified={true}><CreateProfile /></ProtectedRoute>} />
           <Route path="/chatbox" element={<ProtectedRoute requireVerified={true} requireProfile={true}><ChatBox /></ProtectedRoute>} />
           <Route path="/avatar" element={<ProtectedRoute requireVerified={true} requireProfile={true}><AvatarComponent /></ProtectedRoute>} />

@@ -50,6 +50,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const currentUserId = localStorage.getItem('currentUserId');
+      console.log(currentUserId);
+
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -98,3 +101,99 @@ const Login = () => {
 
 export default Login;
 
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
+// import { auth } from '../../firebase';
+// import NavBar from '../NavBar';
+// import { Box, TextField, Button, Typography } from '@mui/material';
+// import './Login.css';
+
+// const LoginForm = ({ email, setEmail, password, setPassword, handleSubmit }) => (
+//   <div className="login-form-container">
+//     <Box component="form" onSubmit={handleSubmit} className="login-form">
+//       <Typography variant="h4" component="h2" gutterBottom>
+//         Login
+//       </Typography>
+//       <div className="form-group">
+//         <TextField
+//           label="Email"
+//           type="email"
+//           fullWidth
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//           required
+//         />
+//       </div>
+//       <div className="form-group">
+//         <TextField
+//           label="Password"
+//           type="password"
+//           fullWidth
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           required
+//         />
+//       </div>
+//       <Button type="submit" variant="contained" color="primary" fullWidth>
+//         Login
+//       </Button>
+//     </Box>
+//   </div>
+// );
+
+// const Login = () => {
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const navigate = useNavigate();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+//       const user = userCredential.user;
+
+//       if (!user.emailVerified) {
+//         navigate('/verify-email');
+//         return;
+//       }
+
+//       // Fetch user profile from backend
+//       const response = await fetch(`http://localhost:4000/syncUser?uid=${user.uid}`);
+//       const userProfile = await response.json();
+
+//       if (response.ok) {
+//         if (userProfile.name && userProfile.gender && userProfile.yearOfStudy && userProfile.phoneNumber && userProfile.age) {
+//           navigate('/feedcard');
+//         } else {
+//           navigate('/complete-profile');
+//         }
+//       } else {
+//         console.error('Error fetching user profile:', userProfile.message);
+//       }
+//     } catch (error) {
+//       console.error('Error logging in:', error);
+//     }
+//   };
+
+//   return (
+//     <div className="App">
+//       <NavBar />
+//       <Link to='/home'><button>Home</button></Link>
+//       <LoginForm
+//         email={email}
+//         setEmail={setEmail}
+//         password={password}
+//         setPassword={setPassword}
+//         handleSubmit={handleSubmit}
+//       />
+//     </div>
+//   );
+// };
+
+// export default Login;

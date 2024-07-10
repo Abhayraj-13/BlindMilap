@@ -7,7 +7,10 @@ import{ GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import { signOut } from "firebase/auth";
-// Your web app's Firebase configuration
+import {signInWithPopup} from "firebase/auth";
+import {signInWithEmailAndPassword} from "firebase/auth";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyD_aWX4YQ3cpalGBnpYcv2QjjzNU3QRdsg",
   authDomain: "chatapp-b1fa9.firebaseapp.com",
@@ -24,6 +27,6 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const database = getDatabase(app);
 
-export { auth, db, database, createUserWithEmailAndPassword, set, ref, GoogleAuthProvider, signInWithRedirect,signOut };
+export { auth, db, database,signInWithPopup,signInWithEmailAndPassword,createUserWithEmailAndPassword, set, ref, GoogleAuthProvider, signInWithRedirect,signOut };
 
 

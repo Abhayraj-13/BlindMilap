@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "firebase": "^9.23.0",
+    "firebase-admin": "^12.2.0",
     "gsap": "^3.12.5",
     "html-to-image": "^1.11.11",
     "js-file-download": "^0.4.12",
