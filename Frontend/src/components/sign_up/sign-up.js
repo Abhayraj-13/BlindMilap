@@ -102,45 +102,7 @@ const SignUpForm = () => {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
-  // const handleSignUp = async (e) => {
-  //   e.preventDefault();
-  //   setError('');
-
-  //   if (password !== confirmPassword) {
-  //     setError('Passwords do not match');
-  //     return;
-  //   }
-
-  //   setIsLoading(true);
-
-  //   try {
-  //     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  //     const user = userCredential.user;
-
-  //     // Send verification email
-  //     await sendEmailVerification(user);
-  //     console.log(user.uid, user.email, name);
-  //     // Save user details in MongoDB
-  //     await fetch('http://localhost:4000/syncUser', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         uid: user.uid,
-  //         email: user.email,
-  //         displayName: name
-  //       })
-  //     });
-
-  //     setIsLoading(false);
-  //     // Redirect to verify email page
-  //     navigate('/verify-email');
-  //   } catch (error) {
-  //     setError(error.message);
-  //     setIsLoading(false);
-  //   }
-  // };
+  
 
 
   const handleSignUp = async (e) => {
@@ -161,18 +123,7 @@ const SignUpForm = () => {
       // Send verification email
       await sendEmailVerification(user);
       console.log(user.uid, user.email, name);
-      // Save user details in MongoDB
-      await fetch('http://localhost:4000/syncUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          uid: user.uid,
-          email: user.email,
-          name: name 
-        })
-      });
+      
   
       setIsLoading(false);
       // Redirect to verify email page
