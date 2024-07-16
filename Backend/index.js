@@ -439,12 +439,23 @@ app.get('/allusers', async (req, res) => {
 });
 
 // Endpoint to fetch a random profile
+// app.get('/random-profile', async (req, res) => {
+//   try {
+//     const count = await User.countDocuments();
+//     const random = Math.floor(Math.random() * count);
+//     const randomUser = await User.findOne().skip(random);
+//     res.send(randomUser);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// });
+
 app.get('/random-profile', async (req, res) => {
   try {
-    const count = await User.countDocuments();
-    const random = Math.floor(Math.random() * count);
-    const randomUser = await User.findOne().skip(random);
-    res.send(randomUser);
+    const profiles = await User.find(); // Add filtering logic as needed
+    const randomIndex = Math.floor(Math.random() * profiles.length);
+    const randomProfile = profiles[randomIndex];
+    res.json(randomProfile);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -457,23 +468,45 @@ app.get('/random-profile', async (req, res) => {
 
 
 
+// app.post('/send-friend-request', async (req, res) => {
+//     try {
+//       const { requesterUid, recipientUid } = req.body;
+//       const recipient = await User.findOne({ uid: recipientUid });
+      
+//       if (!recipient) {
+//         return res.status(404).send({ error: 'Recipient not found' });
+//       }
+  
+//       recipient.friendRequests.push(requesterUid);
+//       await recipient.save();
+//       res.send({ message: 'Friend request sent' });
+//     } catch (error) {
+//       res.status(500).send(error);
+//     }
+//   });
 
 app.post('/send-friend-request', async (req, res) => {
-    try {
-      const { requesterUid, recipientUid } = req.body;
-      const recipient = await User.findOne({ uid: recipientUid });
-      
-      if (!recipient) {
-        return res.status(404).send({ error: 'Recipient not found' });
-      }
-  
-      recipient.friendRequests.push(requesterUid);
-      await recipient.save();
-      res.send({ message: 'Friend request sent' });
-    } catch (error) {
-      res.status(500).send(error);
+  try {
+    const { requesterUid, recipientUid } = req.body;
+    if (!requesterUid || !recipientUid) {
+      return res.status(400).send({ error: 'Both requesterUid and recipientUid are required' });
     }
-  });
+
+    const recipient = await User.findOne({ uid: recipientUid });
+
+    if (!recipient) {
+      return res.status(404).send({ error: 'Recipient not found' });
+    }
+
+    recipient.friendRequests.push(requesterUid);
+    await recipient.save();
+    res.send({ message: 'Friend request sent' });
+  } catch (error) {
+    console.error('Error in /send-friend-request:', error); // Log error for debugging
+    res.status(500).send(error);
+  }
+});
+
   
   // Endpoint to accept a friend request
   app.post('/accept-friend-request', async (req, res) => {
