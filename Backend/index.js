@@ -419,7 +419,8 @@ mongoose.connect('mongodb+srv://supermanhappyvy:Byasyadav1*@cluster0.9nm1yqx.mon
         favouritePlaceInCampus, 
         bio, 
         username, 
-        profile_avatar 
+        profile_avatar,
+        
       };
       const user = new User(userData);
       await user.save();
@@ -488,27 +489,66 @@ app.get('/random-profile', async (req, res) => {
 app.post('/send-friend-request', async (req, res) => {
   try {
     const { requesterUid, recipientUid } = req.body;
-    if (!requesterUid || !recipientUid) {
-      return res.status(400).send({ error: 'Both requesterUid and recipientUid are required' });
-    }
-
     const recipient = await User.findOne({ uid: recipientUid });
+    const requester = await User.findOne({ uid: requesterUid });
 
     if (!recipient) {
       return res.status(404).send({ error: 'Recipient not found' });
     }
 
+    if (!requester) {
+      return res.status(404).send({ error: 'Requester not found' });
+    }
+    
+    console.log('Recipient found:', recipient);
+    console.log('Requester found:', requester);
+
     recipient.friendRequests.push(requesterUid);
+    recipient.notifications.push({
+      requesterUid,
+      requesterName: requester.name,
+      type: 'friend_request',
+      message: `${requester.name} sent you a friend request`,
+    });
+
     await recipient.save();
     res.send({ message: 'Friend request sent' });
   } catch (error) {
-    console.error('Error in /send-friend-request:', error); // Log error for debugging
+    console.error('Error in /send-friend-request:', error);
     res.status(500).send(error);
   }
 });
 
   
   // Endpoint to accept a friend request
+  // app.post('/accept-friend-request', async (req, res) => {
+  //   try {
+  //     const { requesterUid, recipientUid } = req.body;
+  //     const recipient = await User.findOne({ uid: recipientUid });
+  
+  //     if (!recipient) {
+  //       return res.status(404).send({ error: 'Recipient not found' });
+  //     }
+  
+  //     const requester = await User.findOne({ uid: requesterUid });
+  
+  //     if (!requester) {
+  //       return res.status(404).send({ error: 'Requester not found' });
+  //     }
+  
+  //     recipient.friends.push(requesterUid);
+  //     requester.friends.push(recipientUid);
+  
+  //     recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
+      
+  //     await recipient.save();
+  //     await requester.save();
+      
+  //     res.send({ message: 'Friend request accepted' });
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //   }
+  // });
   app.post('/accept-friend-request', async (req, res) => {
     try {
       const { requesterUid, recipientUid } = req.body;
@@ -528,18 +568,40 @@ app.post('/send-friend-request', async (req, res) => {
       requester.friends.push(recipientUid);
   
       recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
-      
+      recipient.notifications = recipient.notifications.filter(
+        notification => notification.requesterUid !== requesterUid && notification.type !== 'friend_request'
+      );
+  
       await recipient.save();
       await requester.save();
-      
+  
       res.send({ message: 'Friend request accepted' });
     } catch (error) {
+      console.error('Error in /accept-friend-request:', error);
       res.status(500).send(error);
     }
   });
-
+  
 
 // Endpoint to reject a friend request
+// app.post('/reject-friend-request', async (req, res) => {
+//   try {
+//     const { requesterUid, recipientUid } = req.body;
+//     const recipient = await User.findOne({ uid: recipientUid });
+
+//     if (!recipient) {
+//       return res.status(404).send({ error: 'Recipient not found' });
+//     }
+
+//     recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
+    
+//     await recipient.save();
+    
+//     res.send({ message: 'Friend request rejected' });
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// });
 app.post('/reject-friend-request', async (req, res) => {
   try {
     const { requesterUid, recipientUid } = req.body;
@@ -550,11 +612,30 @@ app.post('/reject-friend-request', async (req, res) => {
     }
 
     recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
-    
+    recipient.notifications = recipient.notifications.filter(
+      notification => notification.requesterUid !== requesterUid && notification.type !== 'friend_request'
+    );
+
     await recipient.save();
-    
+
     res.send({ message: 'Friend request rejected' });
   } catch (error) {
+    console.error('Error in /reject-friend-request:', error);
+    res.status(500).send(error);
+  }
+});
+app.get('/notifications/:uid', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ uid });
+
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    res.json(user.notifications);
+  } catch (error) {
+    console.error('Error in /notifications/:uid:', error);
     res.status(500).send(error);
   }
 });
