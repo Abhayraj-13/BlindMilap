@@ -451,6 +451,62 @@ app.get('/random-profile', async (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+app.post('/send-friend-request', async (req, res) => {
+    try {
+      const { requesterUid, recipientUid } = req.body;
+      const recipient = await User.findOne({ uid: recipientUid });
+      
+      if (!recipient) {
+        return res.status(404).send({ error: 'Recipient not found' });
+      }
+  
+      recipient.friendRequests.push(requesterUid);
+      await recipient.save();
+      res.send({ message: 'Friend request sent' });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  
+  // Endpoint to accept a friend request
+  app.post('/accept-friend-request', async (req, res) => {
+    try {
+      const { requesterUid, recipientUid } = req.body;
+      const recipient = await User.findOne({ uid: recipientUid });
+  
+      if (!recipient) {
+        return res.status(404).send({ error: 'Recipient not found' });
+      }
+  
+      const requester = await User.findOne({ uid: requesterUid });
+  
+      if (!requester) {
+        return res.status(404).send({ error: 'Requester not found' });
+      }
+  
+      recipient.friends.push(requesterUid);
+      requester.friends.push(recipientUid);
+  
+      recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
+      
+      await recipient.save();
+      await requester.save();
+      
+      res.send({ message: 'Friend request accepted' });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
