@@ -504,6 +504,28 @@ app.post('/send-friend-request', async (req, res) => {
       res.status(500).send(error);
     }
   });
+
+
+// Endpoint to reject a friend request
+app.post('/reject-friend-request', async (req, res) => {
+  try {
+    const { requesterUid, recipientUid } = req.body;
+    const recipient = await User.findOne({ uid: recipientUid });
+
+    if (!recipient) {
+      return res.status(404).send({ error: 'Recipient not found' });
+    }
+
+    recipient.friendRequests = recipient.friendRequests.filter(uid => uid !== requesterUid);
+    
+    await recipient.save();
+    
+    res.send({ message: 'Friend request rejected' });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
   
 
 
