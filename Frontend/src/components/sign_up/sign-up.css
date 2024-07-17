@@ -1,3 +1,18 @@
 input{
     color: #000000;
 }
+
+.form-control{
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: #000000;
+}
+
+button{
+    background-color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-left: 2%;
+}

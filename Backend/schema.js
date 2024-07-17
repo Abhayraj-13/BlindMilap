@@ -81,7 +81,7 @@ const userSchema = new Schema({
     type: Number,
     required: true,
     min: 1,
-    max: 6
+    max: 4
   },
   phoneNumber: {
     type: String,
@@ -91,7 +91,7 @@ const userSchema = new Schema({
   age: {
     type: Number,
     required: true,
-    min: 0
+    min: 18
   },
   favouritePlaceInCampus: {
     type: String,
@@ -111,7 +111,17 @@ const userSchema = new Schema({
     required: true
   },
   friendRequests: [{ type: String }], // Store UIDs of users who sent friend requests
-  friends: [{ type: String }] // Store UIDs of friends
+  friends: [{ type: String }], // Store UIDs of friends
+
+  notifications: [
+    {
+      requesterUid: String,
+      requesterName: String,
+      type: {type:String,enum:['friend_request'],required:true},
+      message: String,
+      date: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);
