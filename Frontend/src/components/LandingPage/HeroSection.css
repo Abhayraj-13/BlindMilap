@@ -78,7 +78,7 @@ top: 214px;
   
     .transition-to-features {
         position: absolute;
-        bottom: 0;
+        bottom: -75px;
         left: 0;
         width: 100%;
         height: 200px; /* Adjust height as needed */
