@@ -640,6 +640,26 @@ app.get('/notifications/:uid', async (req, res) => {
   }
 });
 
+//
+
+app.get('/friends/:uid', async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const user = await User.findOne({ uid });
+
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    const friends = await User.find({ uid: { $in: user.friends } }, {username: 1, profile_avatar: 1, bio: 1 });
+    // console.log(friends[0].username);
+    res.json(friends);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
   
 
 
