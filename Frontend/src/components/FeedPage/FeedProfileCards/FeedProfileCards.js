@@ -40,7 +40,7 @@
 //   };
 
 //   const handleSendFriendRequest = async () => {
-   
+
 //   };
 
 //   useEffect(() => {
@@ -214,7 +214,7 @@
 //       </div>
 //     );
 //   };
-  
+
 //   const fetchRandomProfile = async () => {
 //     try {
 //       const response = await fetch('http://localhost:4000/random-profile');
@@ -235,9 +235,9 @@
 //       console.error('User UID or profile is missing');
 //       return;
 //     }
-  
+
 //     console.log('Sending Friend Request from:', currentUserUid, 'to:', profile.uid); // Log UIDs
-  
+
 //     try {
 //       const response = await fetch('http://localhost:4000/send-friend-request', {
 //         method: 'POST',
@@ -249,7 +249,7 @@
 //           recipientUid: profile.uid,
 //         }),
 //       });
-  
+
 //       if (response.ok) {
 //         const result = await response.json();
 //         console.log('Friend request sent:', result);
@@ -273,7 +273,7 @@
 //           recipientUid: currentUserUid,
 //         }),
 //       });
-  
+
 //       if (response.ok) {
 //         const result = await response.json();
 //         console.log('Friend request accepted:', result);
@@ -286,7 +286,7 @@
 //       console.error('Error accepting friend request:', error);
 //     }
 //   };
-  
+
 //   const handleReject = async (requesterUid) => {
 //     try {
 //       const response = await fetch('http://localhost:4000/reject-friend-request', {
@@ -299,7 +299,7 @@
 //           recipientUid: currentUserUid,
 //         }),
 //       });
-  
+
 //       if (response.ok) {
 //         const result = await response.json();
 //         console.log('Friend request rejected:', result);
@@ -312,7 +312,7 @@
 //       console.error('Error rejecting friend request:', error);
 //     }
 //   };
-  
+
 
 //   useEffect(() => {
 //     const fetchNotifications = async () => {
@@ -328,10 +328,10 @@
 //         console.error('Error fetching notifications:', error);
 //       }
 //     };
-  
+
 //     fetchNotifications();
 //   }, [currentUserUid]);
-  
+
 //   useEffect(() => {
 //     fetchRandomProfile();
 //   }, []);
@@ -848,7 +848,7 @@
 //   };
 
 
-    
+
 
 
 
@@ -1065,34 +1065,34 @@
 //           ))}
 //         </Box>
 //       </Drawer>
-      // <Drawer
-      //   anchor="right"
-      //   open={friendsOpen}
-      //   onClose={toggleFriendsDrawer(false)}
-      //   sx={{
-      //     '& .MuiDrawer-paper': { width: drawerWidth },
-      //   }}
-      // >
-      //   <Box sx={{ padding: 2 }}>
-      //     <Typography variant="h6">Friends</Typography>
-      //     {friends.map(friend => (
-      //       <Box key={friend.uid} sx={{ margin: 1 }}>
-      //         <Card sx={{ display: 'flex', alignItems: 'center' }}>
-      //           <CardMedia
-      //             component="img"
-      //             sx={{ width: 64, height: 64, borderRadius: '50%' }}
-      //             image={friend.profile_avatar}
-      //             alt="friend avatar"
-      //           />
-      //           <CardContent>
-      //             <Typography variant="h6">{friend.username}</Typography>
-      //             <Typography variant="body2" color="text.secondary">{friend.bio}</Typography>
-      //           </CardContent>
-      //         </Card>
-      //       </Box>
-      //     ))}
-      //   </Box>
-      // </Drawer>
+// <Drawer
+//   anchor="right"
+//   open={friendsOpen}
+//   onClose={toggleFriendsDrawer(false)}
+//   sx={{
+//     '& .MuiDrawer-paper': { width: drawerWidth },
+//   }}
+// >
+//   <Box sx={{ padding: 2 }}>
+//     <Typography variant="h6">Friends</Typography>
+//     {friends.map(friend => (
+//       <Box key={friend.uid} sx={{ margin: 1 }}>
+//         <Card sx={{ display: 'flex', alignItems: 'center' }}>
+//           <CardMedia
+//             component="img"
+//             sx={{ width: 64, height: 64, borderRadius: '50%' }}
+//             image={friend.profile_avatar}
+//             alt="friend avatar"
+//           />
+//           <CardContent>
+//             <Typography variant="h6">{friend.username}</Typography>
+//             <Typography variant="body2" color="text.secondary">{friend.bio}</Typography>
+//           </CardContent>
+//         </Card>
+//       </Box>
+//     ))}
+//   </Box>
+// </Drawer>
 //       <Box
 //         component="main"
 //         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
@@ -1201,7 +1201,7 @@
 //   const fetchFriends = async () => {
 //         if (!currentUserUid) return;
 //         console.log("getfriends");
-    
+
 //         try {
 //           const response = await fetch(`http://localhost:4000/friends/${currentUserUid}`);
 //           if (response.ok) {
@@ -1215,8 +1215,8 @@
 //           console.error('Error fetching friends:', error);
 //         }
 //       };
-    
-    
+
+
 
 //   const fetchRandomProfile = async () => {
 //     try {
@@ -1452,7 +1452,7 @@
 
 
 
-          
+
 //           <ListItem>
 //             <ListItemText primary="Chatrooms" />
 //           </ListItem>
@@ -1463,7 +1463,7 @@
 //           ))}
 //         </List>
 //       </Drawer>
-      
+
 //       <Drawer
 //         anchor="right"
 //         open={notificationsOpen}
@@ -1978,7 +1978,7 @@
 //     if (!currentUserUid) {
 //       return;
 //     }
-    
+
 //     try {
 //       const response = await fetch(`http://localhost:4000/friends/${currentUserUid}`);
 //       if (response.ok) {
@@ -2295,6 +2295,8 @@
 // export default FeedProfileCards;
 
 
+
+
 import React, { useState, useEffect } from 'react';
 import {
   AppBar,
@@ -2391,15 +2393,39 @@ function FeedProfileCards() {
     }
   };
 
+  // const fetchChatrooms = async (userUid) => {
+  //   const q = query(collection(db, "chatrooms"), where("users", "array-contains", userUid));
+  //   const querySnapshot = await getDocs(q);
+  //   const rooms = [];
+  //   querySnapshot.forEach((doc) => {
+  //     rooms.push({ ...doc.data(), id: doc.id });
+  //   });
+  //   setChatrooms(rooms);
+  // };
+
   const fetchChatrooms = async (userUid) => {
     const q = query(collection(db, "chatrooms"), where("users", "array-contains", userUid));
     const querySnapshot = await getDocs(q);
     const rooms = [];
-    querySnapshot.forEach((doc) => {
-      rooms.push({ ...doc.data(), id: doc.id });
-    });
+  
+    for (const doc of querySnapshot.docs) {
+      const chatroomData = doc.data();
+      const otherUserUid = chatroomData.users.find(uid => uid !== userUid);
+      
+      // Fetch the username of the other user
+      const response = await fetch(`http://localhost:4000/user/${otherUserUid}`);
+      const userData = await response.json();
+      
+      rooms.push({
+        ...chatroomData,
+        id: doc.id,
+        otherUserUsername: userData.username,
+      });
+    }
+    
     setChatrooms(rooms);
   };
+  
 
   useEffect(() => {
     fetchRandomProfile();
@@ -2548,11 +2574,17 @@ function FeedProfileCards() {
             ))}
           </List>
           <Divider />
-          {chatrooms.map((chatroom) => (
+          {/* {chatrooms.map((chatroom) => (
             <ListItem button key={chatroom.id} onClick={() => setCurrentChatroomId(chatroom.id)}>
               <ListItemText primary={`Chat with ${chatroom.users.find(uid => uid !== currentUserUid)}`} />
             </ListItem>
-          ))}
+          ))} */}
+          {chatrooms.map((chatroom) => (
+  <ListItem button key={chatroom.id} onClick={() => setCurrentChatroomId(chatroom.id)}>
+    <ListItemText primary={`Chat with ${chatroom.otherUserUsername}`} />
+  </ListItem>
+))}
+
         </Box>
       </Drawer>
       <Drawer
@@ -2581,6 +2613,8 @@ function FeedProfileCards() {
         {chatrooms.map((chatroom) => (
           <ListItem button key={chatroom.id} onClick={() => setCurrentChatroomId(chatroom.id)}>
             <ListItemText primary={`Chat with ${chatroom.users.find(uid => uid !== currentUserUid)}`} />
+ {/* <ListItemText primary={`Chat with ${userDetails[chatroom.users.find(uid => uid !== currentUserUid)].username} />`} /> */}
+
           </ListItem>
         ))}
       </Drawer>
@@ -2608,24 +2642,7 @@ function FeedProfileCards() {
           </List>
         </Box>
       </Drawer>
-      {/* <Drawer
-        anchor="right"
-        open={friendsOpen}
-        onClose={toggleFriendsDrawer(false)}
-      >
-        <Box sx={{ width: 300 }}>
-          <IconButton onClick={toggleFriendsDrawer(false)} sx={{ margin: 1 }}>
-            <CloseIcon />
-          </IconButton>
-          <List>
-            {friends.map((friend, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={friend.name} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Drawer> */}
+
 
       <Drawer
         anchor="right"
@@ -2680,7 +2697,6 @@ function FeedProfileCards() {
                     {profile.bio}
                   </Typography>
                 </CardContent>
-                {/* <Button onClick={handleSendFriendRequest}>Send Friend Request</Button> */}
                 <Button
                 variant="contained"
                 color="primary"
@@ -2710,5 +2726,4 @@ function FeedProfileCards() {
 }
 
 export default FeedProfileCards;
-
 
